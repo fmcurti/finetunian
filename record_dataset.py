@@ -1,4 +1,5 @@
 import json
+import random
 
 import streamlit as st
 from st_audiorec import st_audiorec
@@ -39,10 +40,12 @@ def save_audio(data_item, audio, advance=False):
         advance_index()
     return file_name
 
-prev_col, next_col = st.columns([1,1])
+prev_col, middle_column ,next_col = st.columns([1,1,1])
 
 with prev_col:
     st.button("Previous", key="prev", on_click=lambda: advance_index(-1))
+with middle_column:
+    st.button("Feeling Lucky", key="lucky", on_click=lambda: advance_index(random.randint(1, len(dataset) - 1)))
 with next_col:
     st.button("Next", key="next", on_click=lambda: advance_index())
 
