@@ -163,3 +163,5 @@ cython_debug/
 
 dataset/data/*
 notebooks/whisper-small-dv
+models/*
+secrets.toml
