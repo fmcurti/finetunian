@@ -11,18 +11,18 @@ s3 = boto3.client(
 )
 
 bucket_name = "finetunian"
-output_dir = "dataset/audios"
+output_dir = "dataset/data"
 
 if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
-    response = s3.list_objects_v2(Bucket=bucket_name, Prefix="dataset/audios/")
+    os.makedirs(output_dir, exist_ok=True)
+response = s3.list_objects_v2(Bucket=bucket_name, Prefix="dataset/audios/")
 
-    for obj in response.get("Contents", []):
-        key = obj["Key"]
-        if key.endswith(".wav"):
-            output_path = os.path.join(output_dir, os.path.basename(key))
-            if os.path.exists(output_path):
-                print(f"File {output_path} already exists, skipping download.")
-                continue
-            s3.download_file(bucket_name, key, output_path)
-            print(f"Downloaded {key} to {output_path}")
+for obj in response.get("Contents", []):
+    key = obj["Key"]
+    if key.endswith(".wav"):
+        output_path = os.path.join(output_dir, os.path.basename(key))
+        if os.path.exists(output_path):
+            print(f"File {output_path} already exists, skipping download.")
+            continue
+        s3.download_file(bucket_name, key, output_path)
+        print(f"Downloaded {key} to {output_path}")

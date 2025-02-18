@@ -5,7 +5,7 @@ import streamlit as st
 from st_audiorec import st_audiorec
 from st_files_connection import FilesConnection
 
-conn = st.connection('s3', type=FilesConnection)
+conn = st.connection('s3', type=FilesConnection) ## This can be changed for "local" to use the local file system
 
 def get_max_index():
     audios = conn.fs.ls("finetunian/dataset/audios")
