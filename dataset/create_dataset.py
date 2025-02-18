@@ -15,7 +15,7 @@ def create_metadata():
                 
 
 def create_dataset():
-    dataset = load_dataset('audiofolder', data_dir=r'C:\Users\Felip\OneDrive\Desktop\Dev\finetunian\dataset')
+    dataset = load_dataset('audiofolder', data_dir=r'.')
     dataset.save_to_disk('dataset/finetunian')
 
 if __name__ == "__main__":
